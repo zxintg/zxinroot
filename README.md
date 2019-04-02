@@ -22,7 +22,7 @@ and:
 
 ```gradle
 dependencies {
-    implementation 'com.github.zxintg:pullzoom:{latest version}'
+    implementation 'com.github.zxintg:zxinroot:{latest version}'
 }
 ```
 
