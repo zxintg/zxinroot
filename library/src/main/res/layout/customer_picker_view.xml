@@ -55,7 +55,7 @@
         android:paddingRight="20dp"
         android:paddingTop="15dp">
 
-        <com.zxin.zxinlib.view.popup.PickerToolsView
+        <com.zxin.root.view.popup.PickerToolsView
             android:id="@+id/customer_picker_ptviewone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -63,35 +63,35 @@
             android:visibility="gone"
             />
 
-        <com.zxin.zxinlib.view.popup.PickerToolsView
+        <com.zxin.root.view.popup.PickerToolsView
             android:id="@+id/customer_picker_ptviewtwo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:visibility="gone"
             android:layout_weight="1" />
 
-        <com.zxin.zxinlib.view.popup.PickerToolsView
+        <com.zxin.root.view.popup.PickerToolsView
             android:id="@+id/customer_picker_ptviewthree"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:visibility="gone"
             android:layout_weight="1" />
 
-        <com.zxin.zxinlib.view.popup.PickerToolsView
+        <com.zxin.root.view.popup.PickerToolsView
             android:id="@+id/customer_picker_ptviewfour"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:visibility="gone"
             android:layout_weight="1" />
 
-        <com.zxin.zxinlib.view.popup.PickerToolsView
+        <com.zxin.root.view.popup.PickerToolsView
             android:id="@+id/customer_picker_ptviewfive"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:visibility="gone"
             android:layout_weight="1" />
 
-        <com.zxin.zxinlib.view.popup.PickerToolsView
+        <com.zxin.root.view.popup.PickerToolsView
             android:id="@+id/customer_picker_ptviewsix"
             android:layout_width="0dp"
             android:layout_height="match_parent"
