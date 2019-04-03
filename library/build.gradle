@@ -67,8 +67,10 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:2.0.2'
     //RxJava
     //内存泄漏检测
-    debugApi 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    /*debugApi 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'*/
+    implementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    implementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     //解决64k问题
     implementation 'com.android.support:multidex:1.0.1'
     //compile 'net.danlew:android.joda:2.9.5'
