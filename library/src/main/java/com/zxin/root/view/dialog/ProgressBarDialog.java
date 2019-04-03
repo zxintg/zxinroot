@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 
 /**
  * Created by 进度条 on 2017/12/29.

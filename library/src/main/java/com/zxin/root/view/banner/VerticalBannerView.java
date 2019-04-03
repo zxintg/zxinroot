@@ -15,7 +15,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 
 /**
  * Description:

@@ -22,7 +22,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.util.BaseStringUtils;
 import com.zxin.root.util.SystemInfoUtil;
 import com.zxin.root.util.UiUtils;

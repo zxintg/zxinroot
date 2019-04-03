@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 
 /**
  * Created by hy on 2017/10/16.

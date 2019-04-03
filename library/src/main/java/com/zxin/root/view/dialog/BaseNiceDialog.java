@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.util.AppManager;
 import com.zxin.root.util.SystemInfoUtil;
 

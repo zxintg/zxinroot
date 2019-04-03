@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.util.ImageUtil;
 
 

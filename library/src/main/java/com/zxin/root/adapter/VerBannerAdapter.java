@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.adapter.SimpleAdapter.SimpleAdapter;
 import com.zxin.root.adapter.SimpleAdapter.TrdViewHolder;
 import com.zxin.root.bean.VerticalBanner;

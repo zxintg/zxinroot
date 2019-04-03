@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zxin.refreshlib.IRefresher;
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 
 /**
  * Created by 下拉按键 on 2017/3/30.

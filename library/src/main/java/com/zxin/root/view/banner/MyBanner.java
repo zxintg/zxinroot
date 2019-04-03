@@ -10,7 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,7 +13,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 
 /*****
  * 自定义图片

@@ -29,7 +29,7 @@ import android.view.ViewParent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.CompoundButton;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.util.UiUtils;
 
 

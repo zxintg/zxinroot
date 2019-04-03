@@ -22,7 +22,7 @@ import android.widget.ScrollView;
 import com.bumptech.glide.util.LruCache;
 import com.zxin.refreshlib.RefreshRelativeLayout;
 import com.tencent.smtt.sdk.WebView;
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.adapter.SimpleAdapter.TrdViewHolder;
 import com.zxin.root.view.RefreshCommonView;
 import com.zxin.root.view.dialog.BaseNiceDialog;

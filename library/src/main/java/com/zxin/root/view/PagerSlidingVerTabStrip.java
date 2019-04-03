@@ -19,7 +19,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.adapter.ViewPageFragmentAdapter;
 import com.zxin.root.bean.TitleBean;
 import com.zxin.root.util.ImageUtil;

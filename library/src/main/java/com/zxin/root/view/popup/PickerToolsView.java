@@ -11,9 +11,7 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
-
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.util.UiUtils;
 
 import java.util.ArrayList;

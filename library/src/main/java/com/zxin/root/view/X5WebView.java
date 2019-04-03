@@ -12,7 +12,7 @@ import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.util.LogUtils;
 import com.zxin.root.util.SystemInfoUtil;
 import com.zxin.root.util.UiUtils;

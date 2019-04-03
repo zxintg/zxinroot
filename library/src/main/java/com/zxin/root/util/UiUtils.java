@@ -8,7 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.view.CustomGridLayoutManager;
 import com.zxin.root.view.CustomLinearLayoutManager;
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.zxin.refreshlib.IRefresher;
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 
 /**
  * Created by Administrator on 2017/3/26.

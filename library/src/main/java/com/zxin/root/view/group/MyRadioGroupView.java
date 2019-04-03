@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.util.SystemInfoUtil;
 import java.util.ArrayList;
 import java.util.List;

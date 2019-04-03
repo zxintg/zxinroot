@@ -29,7 +29,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.glide.ProgressModelLoader;
 import com.zxin.root.view.CircleProgress;
 import java.io.File;

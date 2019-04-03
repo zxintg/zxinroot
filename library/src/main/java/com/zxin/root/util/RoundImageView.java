@@ -15,7 +15,7 @@ import android.graphics.drawable.NinePatchDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 
 /**
  * 圆形ImageView，可设置最多两个宽度不同且颜色不同的圆形边框。

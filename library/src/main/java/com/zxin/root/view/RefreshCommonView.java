@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.zxin.refreshlib.DefaultNegativeRefreshers.NegativeRefresherWithNodata;
 import com.zxin.refreshlib.IRefreshListener;
 import com.zxin.refreshlib.RefreshRelativeLayout;
-import com.zxin.zxinlib.R;
+import com.zxin.root.R;
 import com.zxin.root.util.BaseStringUtils;
 import com.zxin.root.util.SystemInfoUtil;
 import com.zxin.root.util.UiUtils;
