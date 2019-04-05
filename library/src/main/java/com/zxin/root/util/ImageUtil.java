@@ -132,7 +132,6 @@ public class ImageUtil {
 
     /****
      * 加载自定义圆形图片
-     * @param mContext
      * @param path
      * @param mImageView
      * @param lodingImage
@@ -184,7 +183,6 @@ public class ImageUtil {
 
     /*****
      * 加载进度条
-     * @param mContext
      * @param path
      * @param mImageView
      */
@@ -482,7 +480,6 @@ public class ImageUtil {
 
     /****
      * 网络图片虚化
-     * @param mContext
      * @param url
      * @param radius
      */
@@ -490,14 +487,13 @@ public class ImageUtil {
         Glide.with(mContext).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                loadRSBlurImage(mContext,resource,imageView,radius);
+                loadRSBlurImage(resource,imageView,radius);
             }
         });
     }
 
     /****
      * Bitmap设置虚化效果 利用ScriptIntrinsicBlur，就可以简单高效地实现高斯模糊效果，可通过参数radius设置虚化的程度。
-     * @param mContext
      * @param source
      * @param radius
      * @return

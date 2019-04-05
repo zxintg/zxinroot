@@ -31,7 +31,7 @@ public class MyBannerView {
     public View newView(final BannerBean myBannerModel) {
         View view = layoutInflater.inflate(R.layout.view_banner_item, null, false);
         ImageView imageView = (ImageView) view.findViewById(R.id.view_banner_item_iv_AdImg);
-        ImageUtil.getInstance(context).loadImageViewLoding(context,myBannerModel.getPicUrl(),imageView,R.mipmap.default_iamge,R.mipmap.default_iamge);
+        ImageUtil.getInstance(context).loadImageViewLoding(myBannerModel.getPicUrl(),imageView,R.mipmap.default_iamge,R.mipmap.default_iamge);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
