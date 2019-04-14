@@ -1,4 +1,4 @@
-package com.zxin.root.adapter.SimpleAdapter;
+package com.zxin.root.adapter.simple;
 
 import android.content.Context;
 import android.view.LayoutInflater;

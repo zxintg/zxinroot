@@ -1,4 +1,4 @@
-package com.zxin.root.adapter.SimpleAdapter;
+package com.zxin.root.adapter.simple;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
