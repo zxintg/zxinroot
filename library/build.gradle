@@ -79,6 +79,11 @@ dependencies {
     //Cookie持久化管理(推荐)
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
+    implementation 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
+    // 调试工具
+    implementation 'com.facebook.stetho:stetho:1.3.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.3.1'
+
     implementation 'com.github.zxintg:refreshlib:v1.0.1'
     implementation 'com.github.zxintg:ncalendar_module:v1.0.1'
     implementation 'com.github.zxintg:javautil:1.0.1'
