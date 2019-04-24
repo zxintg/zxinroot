@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.zxin.root.util.LogUtils;
+import com.zxin.root.util.logger.LogUtils;
 
 /**
  * Created by Administrator on 2017/12/12.

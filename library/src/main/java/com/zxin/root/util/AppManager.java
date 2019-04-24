@@ -1,9 +1,18 @@
 package com.zxin.root.util;
 
+import android.app.ActivityManager;
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Process;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 
+import com.zxin.root.util.logger.LogUtils;
+
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -14,14 +23,27 @@ import java.util.Stack;
  * Note :
  */
 public class AppManager {
+    private static final LogUtils.Tag TAG = new LogUtils.Tag("AppManager");
+
     private Stack<AppCompatActivity> activityStack;
     private static volatile AppManager appManager = null;
+    private Application mApplication;
+    private int mMainProcessId = -1;
+    private String mPackageName = null;
 
     /*****
      * 私有化，防止外部调用实例化
      */
     private AppManager() {
 
+    }
+
+    /*****
+     * 初始化
+     * @param mApplication
+     */
+    public void init(Application mApplication){
+        this.mApplication = mApplication;
     }
 
     /**
@@ -61,6 +83,14 @@ public class AppManager {
 
     public FragmentManager getFragmentManager(){
        return currentActivity().getSupportFragmentManager();
+    }
+
+    public Application getApplication(){
+        return mApplication;
+    }
+
+    public Context getApplicationContext(){
+        return mApplication.getApplicationContext();
     }
 
     /****
@@ -219,5 +249,38 @@ public class AppManager {
         }
         return false;
     }
+
+    /****
+     * 获取主线程ID
+     * @param context
+     * @return
+     */
+    public int getMainProcessId(Context context) {
+        if (mMainProcessId == -1 || TextUtils.isEmpty(mPackageName)) {
+            mPackageName = context.getPackageName();
+            String processName = context.getApplicationInfo().processName;
+            LogUtils.d(TAG, "ProcessName: " + processName);
+            ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            List<ActivityManager.RunningAppProcessInfo> info = manager.getRunningAppProcesses();
+            if (info != null) {
+                for (ActivityManager.RunningAppProcessInfo processInfo : info) {
+                    if (mPackageName.equalsIgnoreCase(processInfo.processName)) {
+                        mMainProcessId = processInfo.pid;
+                        return mMainProcessId;
+                    }
+                }
+            }
+        }
+        return mMainProcessId;
+    }
+
+    /****
+     * 判断当前线程是否在主线程
+     * @return
+     */
+    public boolean isMainProcess() {
+        return Process.myPid() == getMainProcessId(getApplicationContext());
+    }
+
 
 }

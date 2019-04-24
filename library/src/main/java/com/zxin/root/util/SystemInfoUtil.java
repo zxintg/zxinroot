@@ -19,24 +19,30 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.IBinder;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.Window;
 import android.widget.FrameLayout;
 import com.zxin.root.bean.AppInfoBean;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SystemInfoUtil {
 
     public static final String TAG = SystemInfoUtil.class.getSimpleName();
 
     private static volatile SystemInfoUtil infoUtil = null;
+    private static String mVersionName;
+    private static String mVersionCode;
 
     private Context mContext;
     private SystemInfoUtil(Context mContext){
@@ -108,13 +114,18 @@ public class SystemInfoUtil {
      *
      * @return
      */
-    public String getVersionName() {
-        try {
-            return mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0).versionName;
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
+    public String getAppVersionName() {
+        if (TextUtils.isEmpty(mVersionName)) {
+            try {
+                PackageManager packageManager = mContext.getPackageManager();
+                PackageInfo packageInfo = packageManager.getPackageInfo(mContext.getPackageName(), 0);
+                String appVersion = packageInfo.versionName; // appVersion
+                mVersionName = appVersion;
+            } catch (Exception e) {
+                return mVersionName = "";
+            }
         }
-        return null;
+        return mVersionName;
     }
 
     /**
@@ -122,12 +133,18 @@ public class SystemInfoUtil {
      *
      * @return
      */
-    public int getVersionCode() {
-        try {
-            return mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0).versionCode;
-        } catch (NameNotFoundException e) {
-            return -1;
+    public String getAppVersionCode() {
+        if (BaseStringUtils.isNull(mVersionCode)) {
+            try {
+                PackageManager packageManager = mContext.getPackageManager();
+                PackageInfo packageInfo = packageManager.getPackageInfo(mContext.getPackageName(), 0);
+                String appVersion = String.valueOf(packageInfo.versionCode); // appVersion
+                mVersionCode = appVersion;
+            } catch (Exception e) {
+                return mVersionCode = "";
+            }
         }
+        return mVersionCode;
     }
 
     /****
@@ -135,7 +152,7 @@ public class SystemInfoUtil {
      * @return
      */
     public boolean isUpdateApp(String webAppCode) {
-        String[] localCode = getVersionName().split("\\.");
+        String[] localCode = getApplicationName().split("\\.");
         String[] webCode = webAppCode.split("\\.");
         if (localCode.length != webCode.length)
             return true;
@@ -490,6 +507,52 @@ public class SystemInfoUtil {
     public PowerManager.WakeLock getPowerManager(){
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         return pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "liveTAG");
+    }
+
+    public String getOSVer() {
+        return Build.DISPLAY;
+    }
+
+    public String getModel() {
+        return Build.MODEL;
+    }
+
+    public String getLanguage() {
+        return UiUtils.getInstance(mContext).getLocale().getLanguage();
+    }
+
+    public String getRegion() {
+        return UiUtils.getInstance(mContext).getLocale().getCountry();
+    }
+
+    /***
+     *
+     * 获取去Window 实例
+     *
+     * kui.liu 2019/04/10 10:02
+     * @return
+     */
+    public Window getWindow() {
+        return AppManager.getAppManager().currentActivity().getWindow();
+    }
+
+    /*****
+     * 获取WindowToken 实例
+     *
+     * kui.liu 2019/04/10 16:40
+     *
+     * @param mView
+     * @return
+     */
+    public IBinder getWindowToken(View mView) {
+        return mView == null ? getWindow().getDecorView().getWindowToken() : mView.getWindowToken();
+    }
+
+    public String getProcessName() {
+        if (mContext != null && mContext.getApplicationInfo() != null) {
+            return mContext.getApplicationInfo().processName;
+        }
+        return "unknown";
     }
 
 }

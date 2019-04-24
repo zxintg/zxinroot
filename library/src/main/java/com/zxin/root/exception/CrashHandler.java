@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Looper;
 
-import com.zxin.root.util.LogUtils;
+import com.zxin.root.util.logger.LogUtils;
 
 import java.io.File;
 import java.io.PrintWriter;

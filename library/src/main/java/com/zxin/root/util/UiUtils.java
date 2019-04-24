@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.content.res.Resources;
 
 import com.zxin.root.R;
 import com.zxin.root.view.CustomGridLayoutManager;
@@ -15,6 +16,7 @@ import com.zxin.root.view.CustomLinearLayoutManager;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class UiUtils {
 
@@ -147,6 +149,14 @@ public class UiUtils {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public Resources getResources(){
+        return mContext.getResources();
+    }
+
+    public Locale getLocale(){
+        return getResources().getConfiguration().locale;
     }
 
     public float getCornerRadius(int dimen){

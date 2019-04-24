@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.orhanobut.logger.Logger;
 import com.zxin.root.bean.MenuEntity;
+import com.zxin.root.util.logger.LogUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

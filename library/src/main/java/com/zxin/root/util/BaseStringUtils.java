@@ -7,6 +7,12 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
 
+import com.zxin.root.util.logger.Logger;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,7 +35,7 @@ public class BaseStringUtils {
     public static final String Share_Area = "Area";
     public static final String Share_City = "City";
     public static final String Share_MineMenu = "MineMenu";
-    public static final String   ClASS_CITY="ClassCity";
+    public static final String ClASS_CITY = "ClassCity";
     public static final String Share_Phone = "Phone";
     public static final String duration = "duration";
     public static final String calendar = "calendar";
@@ -54,21 +60,22 @@ public class BaseStringUtils {
     public static final String select_payStatus = "payStatus";
     public static final String WEB_TYPE = "web_type";
     public static final String WEB_TYPE_fileHtml5 = "fileHtml5";
-    public static final String WEB_TYPE_url="url";
+    public static final String WEB_TYPE_url = "url";
     public static final String WEB_TYPE_html5 = "html5";
-    public static final String   RegistrationID="RegistrationID";
-    public static final String   BadgeCount="BadgeCount";
+    public static final String RegistrationID = "RegistrationID";
+    public static final String BadgeCount = "BadgeCount";
     public static final String Share_BeiKe_Datas = "Share_BeiKe_Datas";
     public static final String access_token = "access_token";
+
     /****
      * 空字符串
      * @param str
      * @return
      */
-    public static boolean textIsEmpty(String str){
-        return TextUtils.isEmpty(str)||str.equals("null")||str.equals(" ")|| str.length() == 0;
+    public static boolean textIsEmpty(String str) {
+        return TextUtils.isEmpty(str) || str.equals("null") || str.equals(" ") || str.length() == 0;
     }
-    
+
     /**
      * <i> 判断输入字符串是否为空 </i>
      *
@@ -80,9 +87,13 @@ public class BaseStringUtils {
     public static boolean isNull(Object inputStr) {
         return (null == inputStr) || "".equals(inputStr) || "null".equals(inputStr) || "".equals(inputStr.toString().trim());
     }
-    
+
+    public static boolean isEmpty(CharSequence str) {
+        return str == null || str.length() == 0;
+    }
+
     public static String trim(String str) {
-        return isNull(str)||textIsEmpty(str)?"":str.trim();
+        return isNull(str) || textIsEmpty(str) ? "" : str.trim();
     }
 
     /*****
@@ -90,8 +101,8 @@ public class BaseStringUtils {
      * @param str
      * @return
      */
-    public static String textStr(String str){
-        return textIsEmpty(str)?"":str;
+    public static String textStr(String str) {
+        return textIsEmpty(str) ? "" : str;
     }
 
     /*****
@@ -99,9 +110,9 @@ public class BaseStringUtils {
      * @param mesg
      * @return
      */
-    public static Spanned textFormatHtml(String mesg){
+    public static Spanned textFormatHtml(String mesg) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-           return Html.fromHtml(mesg,Html.FROM_HTML_MODE_LEGACY);
+            return Html.fromHtml(mesg, Html.FROM_HTML_MODE_LEGACY);
         } else {
             return Html.fromHtml(mesg);
         }
@@ -112,8 +123,8 @@ public class BaseStringUtils {
      * @param sex
      * @return
      */
-    public static String getSex(int sex){
-        return sex==1?"男":sex==0?"女":"";
+    public static String getSex(int sex) {
+        return sex == 1 ? "男" : sex == 0 ? "女" : "";
     }
 
     /****
@@ -121,8 +132,8 @@ public class BaseStringUtils {
      * @param sex
      * @return
      */
-    public static int getSexInt(String sex){
-        return sex.equals("男")?1:0;
+    public static int getSexInt(String sex) {
+        return sex.equals("男") ? 1 : 0;
     }
 
     /*****
@@ -169,12 +180,12 @@ public class BaseStringUtils {
      * apkVersion = currentVersion  return 0
      * apkVersion < currentVersion  return 1
      */
-    public static int compareVersions(Context mContext,String apkVersion) {
+    public static int compareVersions(Context mContext, String apkVersion) {
         //返回结果: -2 ,-1 ,0 ,1
         int result = 0;
         String matchStr = "[0-9]+(\\.[0-9]+)*";
-        apkVersion = apkVersion.replace("V","").replace("v","").trim();
-        String currentVersion = SystemInfoUtil.getInstance(mContext).getVersionName().trim();
+        apkVersion = apkVersion.replace("V", "").replace("v", "").trim();
+        String currentVersion = SystemInfoUtil.getInstance(mContext).getAppVersionName().trim();
         //非版本号格式,返回error
         if (!apkVersion.matches(matchStr)) {
             return -2;
@@ -215,12 +226,13 @@ public class BaseStringUtils {
         }
         return result;
     }
-    
+
     /**
-     *  判断某个字符串是否存在于数组中
-     *  @param stringArray 原数组
-     *  @param subStr 查找的字符串
-     *  @return 是否找到
+     * 判断某个字符串是否存在于数组中
+     *
+     * @param stringArray 原数组
+     * @param subStr      查找的字符串
+     * @return 是否找到
      */
     public static boolean contains(String[] stringArray, String subStr) {
         for (String s : stringArray) {
@@ -233,6 +245,7 @@ public class BaseStringUtils {
 
     private static final String mMunicipality[] = {"上海", "北京", "天津", "重庆", "香港", "澳门", "台湾"};
     private static final String regex = "([^省]+自治区|.*?省)?([^市]+自治州|.*?行政区|.*?地区|.*?行政单位|.+盟|市辖区|.*?市|.*?县)?([^县]+县|.+区|.+市|.+旗|.+海域|.+岛)?(.*)";
+
     /**
      * 解析地址字符串获取省、市、区、路段
      *
@@ -266,6 +279,175 @@ public class BaseStringUtils {
             return result;
         }
         return null;
+    }
+
+    /**
+     * 去除字符串中的空格、回车、换行符、制表符等
+     * @param str
+     * @return
+     */
+    public static String replaceSpecialStr(String str) {
+        String repl = "";
+        if (str != null) {
+            String regEx="[`~!@#$%^&*()+=|{}':;',\\\\s*\\\\t\\\\r\\\\n\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？-]";
+            Pattern p = Pattern.compile(regEx);
+            Matcher m = p.matcher(str);
+            repl = m.replaceAll("").trim();
+        }
+        return repl;
+    }
+
+    /*****
+     * 对象toString()
+     * @param object
+     * @return
+     */
+    public static String toString(Object object) {
+        if (object == null) {
+            return "null";
+        }
+        if (!object.getClass().isArray()) {
+            return object.toString();
+        }
+        if (object instanceof boolean[]) {
+            return Arrays.toString((boolean[]) object);
+        }
+        if (object instanceof byte[]) {
+            return Arrays.toString((byte[]) object);
+        }
+        if (object instanceof char[]) {
+            return Arrays.toString((char[]) object);
+        }
+        if (object instanceof short[]) {
+            return Arrays.toString((short[]) object);
+        }
+        if (object instanceof int[]) {
+            return Arrays.toString((int[]) object);
+        }
+        if (object instanceof long[]) {
+            return Arrays.toString((long[]) object);
+        }
+        if (object instanceof float[]) {
+            return Arrays.toString((float[]) object);
+        }
+        if (object instanceof double[]) {
+            return Arrays.toString((double[]) object);
+        }
+        if (object instanceof Object[]) {
+            return Arrays.deepToString((Object[]) object);
+        }
+        return "Couldn't find a correct type for the object";
+    }
+
+    /****
+     * 比较两个字符串是否相等
+     * @param a
+     * @param b
+     * @return
+     */
+    public static boolean equals(CharSequence a, CharSequence b) {
+        if (a == b) return true;
+        if (a != null && b != null) {
+            int length = a.length();
+            if (length == b.length()) {
+                if (a instanceof String && b instanceof String) {
+                    return a.equals(b);
+                } else {
+                    for (int i = 0; i < length; i++) {
+                        if (a.charAt(i) != b.charAt(i)) return false;
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Copied from "android.util.Log.getStackTraceString()" in order to avoid usage of Android stack
+     * in unit tests.
+     *
+     * @return Stack trace in form of String
+     */
+    public static String getStackTraceString(Throwable tr) {
+        if (tr == null) {
+            return "";
+        }
+
+        // This is to reduce the amount of log spew that apps do in the non-error
+        // condition of the network being unavailable.
+        Throwable t = tr;
+        while (t != null) {
+            if (t instanceof UnknownHostException) {
+                return "";
+            }
+            t = t.getCause();
+        }
+
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        tr.printStackTrace(pw);
+        pw.flush();
+        return sw.toString();
+    }
+
+    /****
+     * 日志等级获取
+     * @param value
+     * @return
+     */
+    public static String logLevel(int value) {
+        switch (value) {
+            case Logger.VERBOSE:
+                return "V";
+            case Logger.DEBUG:
+                return "D";
+            case Logger.INFO:
+                return "I";
+            case Logger.WARN:
+                return "W";
+            case Logger.ERROR:
+                return "E";
+            case Logger.ASSERT:
+                return "A";
+            default:
+                return "U";
+        }
+    }
+
+    /**
+     * 转换储存空间信息
+     *
+     * @param nSize
+     *
+     * @return
+     */
+    public static String byteToString(long nSize) {
+        try {
+            java.text.DecimalFormat df = new java.text.DecimalFormat();
+            String strSize;
+            if (nSize < 1024) {
+                strSize = nSize + "B";
+            } else if (nSize < 1048576) {
+                // 1024*1024
+                df.applyPattern("0");
+                double d = (double) nSize / 1024;
+                strSize = df.format(d) + "K";
+            } else if (nSize < 1073741824) {
+                // 1024*1024*1024
+                df.applyPattern("0.0");
+                double d = (double) nSize / 1048576;
+                strSize = df.format(d) + "M";
+            } else {
+                // >1G
+                df.applyPattern("0.0");
+                double d = (double) nSize / 1073741824;
+                strSize = df.format(d) + "G";
+            }
+            return strSize;
+        } catch (Exception e) {
+            return "0";
+        }
     }
 
 }
