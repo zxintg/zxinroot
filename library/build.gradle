@@ -41,7 +41,7 @@ android {
         SDK_DIR = props.get('sdk.dir');
     }
     dependencies {
-        compileOnly files("${SDK_DIR}/platforms/android-21/data/layoutlib.jar")
+        implementation files("${SDK_DIR}/platforms/android-21/data/layoutlib.jar")
     }
     //以上是为了找到android.os.SystemProperties这个隐藏的类
 }
