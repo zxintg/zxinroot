@@ -23,7 +23,7 @@ import com.bumptech.glide.util.LruCache;
 import com.zxin.refreshlib.RefreshRelativeLayout;
 import com.tencent.smtt.sdk.WebView;
 import com.zxin.root.R;
-import com.zxin.root.adapter.simple.TrdViewHolder;
+import com.zxin.root.adapter.simple.ZxinViewHolder;
 import com.zxin.root.view.RefreshCommonView;
 import com.zxin.root.view.dialog.BaseNiceDialog;
 import com.zxin.root.view.dialog.NiceDialog;
@@ -306,7 +306,7 @@ public class LongPictureUtil {
             final int cacheSize = maxMemory / 8;
             LruCache<String, Bitmap> bitmaCache = new LruCache<>(cacheSize);
             for (int i = 0; i < size; i++) {
-                TrdViewHolder holder = (TrdViewHolder) adapter.createViewHolder(view, adapter.getItemViewType(i));
+                ZxinViewHolder holder = (ZxinViewHolder) adapter.createViewHolder(view, adapter.getItemViewType(i));
                 adapter.onBindViewHolder(holder, i);
                 holder.itemView.measure(View.MeasureSpec.makeMeasureSpec(view.getWidth(), View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
                 holder.itemView.layout(0, 0, holder.itemView.getMeasuredWidth(), holder.itemView.getMeasuredHeight());
