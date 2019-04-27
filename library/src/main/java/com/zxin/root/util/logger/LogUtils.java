@@ -1,8 +1,10 @@
 package com.zxin.root.util.logger;
 
 import android.annotation.SuppressLint;
-import android.os.SystemProperties;
 import android.util.Log;
+
+import com.zxin.root.util.AppManager;
+import com.zxin.root.util.SystemPropertiesProxy;
 
 /**
  * 日志-下载接口
@@ -70,7 +72,7 @@ public class LogUtils {
 
     public static void updateDebugLevel() {
         try {
-            DEBUG_LEVEL = SystemProperties.getInt(KEY_DEBUG_LEVEL, Log.VERBOSE);
+            DEBUG_LEVEL = SystemPropertiesProxy.getInstance(AppManager.getAppManager().currentActivity()).getInt(KEY_DEBUG_LEVEL, Log.VERBOSE);
         } catch (Exception e) {
             DEBUG_LEVEL = Log.DEBUG;
         }
