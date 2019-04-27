@@ -44,7 +44,7 @@ android {
     }
 
     //以下是为了找到android.os.SystemProperties这个隐藏的类
-    String SDK_DIR = System.getenv("ANDROID_SDK_HOME")
+   /* String SDK_DIR = System.getenv("ANDROID_SDK_HOME")
     //("TAG", "SDK_DIR = " + SDK_DIR );
     if(SDK_DIR == null) {
         Properties props = new Properties()
@@ -53,7 +53,7 @@ android {
     }
     dependencies {
         implementation files("${SDK_DIR}/platforms/android-21/data/layoutlib.jar")
-    }
+    }*/
     //以上是为了找到android.os.SystemProperties这个隐藏的类
 }
 

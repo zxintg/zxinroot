@@ -3,7 +3,7 @@ package com.zxin.root.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.os.SystemProperties;
+//import android.os.SystemProperties;
 import android.preference.PreferenceManager;
 import android.text.InputFilter;
 import android.view.View;
@@ -88,10 +88,11 @@ public class GlobalUtil {
     /*  平板：/storage/emulated/nionavi */
     /*  车机：/storage/nionavi */
     private static String getSdPath() {
-        String naviPath = SystemProperties.get(PATH_PROPERTY_NAME,
+       /* String naviPath = SystemProperties.get(PATH_PROPERTY_NAME,
                 PATH_VALUE_ON_CUSTOMER);
 
-        return naviPath;
+        return naviPath;*/
+       return "";
     }
 
     /**
@@ -102,10 +103,11 @@ public class GlobalUtil {
      * @return 需要连接的Launcher包名
      */
     public static String getLauncherPackageName() {
-        String pkgName = SystemProperties.get(LAUNCHER_PACKAGE_NAME_KEY,
+        /*String pkgName = SystemProperties.get(LAUNCHER_PACKAGE_NAME_KEY,
                 LAUNCHER_PACKAGE_NAME_DEFAULT);
         LogUtils.d(TAG, "launcher package name: " + pkgName);
-        return pkgName;
+        return pkgName;*/
+        return "";
     }
 
     public static long getDayToDeleteLog() {
