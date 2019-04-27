@@ -24,6 +24,10 @@ public class ToastUtil {
         this.mContext = mContext;
     }
 
+    public static ToastUtil getInstance(Context mContext) {
+        return getInstance(mContext,true);
+    }
+
     public static ToastUtil getInstance(Context mContext, boolean canShow) {
         if (canShow != isCanShow) {
             isCanShow = canShow;
