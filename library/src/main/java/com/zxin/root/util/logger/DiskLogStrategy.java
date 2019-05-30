@@ -5,10 +5,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import com.zxin.root.util.GlobalUtil;
 import com.zxin.root.util.Utils;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -48,6 +46,9 @@ public class DiskLogStrategy implements LogStrategy {
         private final String folder;
         private final int maxFileSize;
 
+        private File logFile;
+        private FileWriter fileWriter;
+
         WriteHandler(@NonNull Looper looper, @NonNull String folder, int maxFileSize) {
             super(Utils.checkNotNull(looper));
             this.folder = Utils.checkNotNull(folder);
@@ -58,25 +59,28 @@ public class DiskLogStrategy implements LogStrategy {
         @Override
         public void handleMessage(@NonNull Message msg) {
             String content = (String) msg.obj;
-
-            FileWriter fileWriter = null;
-            File logFile = getLogFile(folder, "nionav_");
-
             try {
-                fileWriter = new FileWriter(logFile, true);
+                if (logFile == null || logFile.length() >= maxFileSize) {
+                    closeFileWriter(fileWriter);
+                    logFile = getLogFile(folder, "nionav_");
+                    fileWriter = new FileWriter(logFile, true);
+                }
 
                 writeLog(fileWriter, content);
-
+                //flush操作可以保证内容写入到文件中
                 fileWriter.flush();
-                fileWriter.close();
-
             } catch (IOException e) {
-                if (fileWriter != null) {
-                    try {
-                        fileWriter.flush();
-                        fileWriter.close();
-                    } catch (IOException e1) { /* fail silently */ }
-                }
+                closeFileWriter(fileWriter);
+                logFile = null;
+                fileWriter = null;
+            }
+        }
+
+        private void closeFileWriter(FileWriter fileWriter) {
+            if (fileWriter != null) {
+                try {
+                    fileWriter.close();
+                } catch (IOException e1) { /* fail silently */ }
             }
         }
 
@@ -94,6 +98,16 @@ public class DiskLogStrategy implements LogStrategy {
             fileWriter.append(content);
         }
 
+        /******
+         * 获取最近一次日志文件，判断日志内容是否已达到最大上限了，
+         * 1.如果达到重新新建一个
+         * 2.如果没有达到，获取该日志文件继续写入系统日志信息
+         * 3.不存在文件新建文件
+         *
+         * @param folderName 文件夹路径
+         * @param fileName 部分文件名称
+         * @return 日志文件
+         */
         private File getLogFile(@NonNull String folderName, @NonNull String fileName) {
             Utils.checkNotNull(folderName);
             Utils.checkNotNull(fileName);
@@ -108,22 +122,26 @@ public class DiskLogStrategy implements LogStrategy {
             String[] fileList = appLogDir.list();
 
             File newFile = null;
-            int newFileCount = 0;
-
+            int newFileCount = fileList.length;
+            //通过倒叙获取最新的文件，判断是否可以继续写入信息
             if (fileList != null) {
-                for (; newFileCount < fileList.length; newFileCount++) {
-                    newFile = new File(folder, fileList[newFileCount]);
+                for (; newFileCount > 0; newFileCount--) {
+                    newFile = new File(folder, fileList[newFileCount - 1]);
                     if (!newFile.exists()) {
+                        newFile = null;//文件不存在，需要置空
                         continue;
-                    } else if (newFile.length() >= maxFileSize) {
-                        newFile = createNewFile(fileName);
                     } else {
+                        if (newFile.length() >= maxFileSize) {//文件内容已达上限，新建文件
+                            newFile = createNewFile(fileName);
+                        }
                         break;
                     }
                 }
             }
 
-            if (fileList == null || (newFileCount >= fileList.length && newFile == null)) {
+            if (fileList == null
+                    || (newFileCount <= fileList.length && newFile == null)
+                    || (newFile != null && !newFile.exists())) {//无效文件需要新建
                 newFile = createNewFile(fileName);
             }
 

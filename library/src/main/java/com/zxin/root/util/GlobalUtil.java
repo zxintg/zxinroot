@@ -17,7 +17,7 @@ public class GlobalUtil {
     private static final String APP_LOG_CACHE_DIR = "ZxinAppLog";
     private static final String BAIDU_LOG_DIR = "ZxinSDK/log";
     private static final String SDK_LOG_TEACE_DIR = "trace";
-    private static final String PATH_PROPERTY_NAME = "persist.sys.nav_res_path";
+    private static final String PATH_PROPERTY_NAME = "persist.sys.zxin_res_path";
     private static final String LAUNCHER_PACKAGE_NAME_KEY = "persist.sys.launcher_pkg";
     public static final String PREFERENCE_DAY_TO_DELET_LOG = "delete_log_time";
     public static final String PREFERENCE_IS_RECORD_LOG = "record_log_yes_or_no";
@@ -27,12 +27,12 @@ public class GlobalUtil {
      * Nio vehicle Rom res path is : "/storage/nionavi"; Nio Pad Rom res path is :
      * "/storage/emulated/nionavi"; Other rom res path is /sdcard/nionavi
      */
-    public static final String PATH_VALUE_ON_CUSTOMER = "/sdcard/nionavi";
-    public static final String LAUNCHER_PACKAGE_NAME_DEFAULT = "com.nextev.home";
+    public static final String PATH_VALUE_ON_CUSTOMER = "/sdcard/zxin";
+    public static final String LAUNCHER_PACKAGE_NAME_DEFAULT = "com.zxin";
 
     public static final int PATH_VALUE_DAY_TO_DELETE_LOG = 3;
     public static final long ONE_DAY = (24 * 60 * 60 * 1000);
-    public static final String PATH_VALUE_ON_CAR = "/storage/nionavi";
+    public static final String PATH_VALUE_ON_CAR = "/storage/zxin";
     private static final String DEBUG_MAGIC_STRING = "#*123456*#";
     private static final LogUtils.Tag TAG = new LogUtils.Tag("GlobalUtil");
     /*关闭SDK log的默认记录*/
