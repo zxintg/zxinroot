@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.lang.Thread.UncaughtExceptionHandler;
 
 public class CrashHandler implements UncaughtExceptionHandler {
+    private static final LogUtils.Tag TAG = new LogUtils.Tag("CrashHandler");
     /**
      * 系统默认的UncaughtException处理类（默认情况下，系统会终止当前的异常程序）
      */
@@ -78,7 +79,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 @Override
                 public void run() {
                     Looper.prepare();
-                    LogUtils.d("程序出错啦:" + msg);
+                    LogUtils.d(TAG,"程序出错啦:" + msg);
                     //AppManager.getAppManager().goToActivityForName(MainActivity.class.getName());
                     Looper.loop();
                 }

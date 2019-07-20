@@ -48,7 +48,7 @@ import java.util.Locale;
  * Created by kiu.liu
  */
 public final class FileUtil {
-
+    private static final LogUtils.Tag TAG = new LogUtils.Tag("FileUtil");
     private static volatile FileUtil util = null;
     private Context mContext = null;
 
@@ -558,7 +558,7 @@ public final class FileUtil {
                 for (int i = 0; listFiles != null && i < listFiles.length; i++) {
                     if (listFiles[i].isFile()) {
                         if (!listFiles[i].delete()) {
-                            LogUtils.d("Delete file failed!" + dirPath);
+                            LogUtils.d(TAG,"Delete file failed!" + dirPath);
                             return false;
                         }
                     } else {
@@ -569,7 +569,7 @@ public final class FileUtil {
                 }
             }
         }
-        LogUtils.d("Delete file----file is not exists----" + dirPath);
+        LogUtils.d(TAG,"Delete file----file is not exists----" + dirPath);
         return true;
     }
 
@@ -583,7 +583,7 @@ public final class FileUtil {
             file.delete();
         }
         if (!file.exists())
-            LogUtils.d("安装文件删除成功");
+            LogUtils.d(TAG,"安装文件删除成功");
     }
 
 
@@ -847,7 +847,7 @@ public final class FileUtil {
         File file = new File(filePath);
         if (file.exists()) {
             if (file.getAbsoluteFile().delete()) {
-                LogUtils.d(file.getName() + " 删除成功!");
+                LogUtils.d(TAG,file.getName() + " 删除成功!");
             }
         }
     }

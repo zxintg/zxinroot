@@ -11,6 +11,7 @@ import com.zxin.root.util.logger.LogUtils;
  */
 
 public class CustomLinearLayoutManager extends LinearLayoutManager {
+    private static final LogUtils.Tag TAG = new LogUtils.Tag("CustomLinearLayoutManager");
     private boolean isScrollEnabled = true;
 
     public CustomLinearLayoutManager(Context context) {
@@ -33,7 +34,7 @@ public class CustomLinearLayoutManager extends LinearLayoutManager {
             super.onLayoutChildren(recycler, state);
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
-            LogUtils.e("RecyclerView 快速滚动 崩溃");
+            LogUtils.e(TAG,"RecyclerView 快速滚动 崩溃");
         }
     }
 

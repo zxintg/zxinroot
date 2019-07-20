@@ -19,7 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class ZipUtil {
-
+    private static final LogUtils.Tag TAG = new LogUtils.Tag("ZipUtil");
     /**
      * 解压文件，不设置密码
      * @param zipFilePath 被解压的文件路径（完整路径）
@@ -69,7 +69,7 @@ public class ZipUtil {
             boolean success = unpackZip(in, file);
             return success;
         } catch (Exception e) {
-            LogUtils.e("读取AssetsZip解压======"+e.getMessage());
+            LogUtils.e(TAG,"读取AssetsZip解压======"+e.getMessage());
         }
         return false;
     }
@@ -116,10 +116,10 @@ public class ZipUtil {
 
             zis.close();
         } catch (IOException e) {
-            LogUtils.d("解压文件失败====="+e.getMessage());
+            LogUtils.d(TAG,"解压文件失败====="+e.getMessage());
             return false;
         }
-        LogUtils.d("解压文件成功:" + outputDir.getAbsolutePath());
+        LogUtils.d(TAG,"解压文件成功:" + outputDir.getAbsolutePath());
         return true;
     }
 
