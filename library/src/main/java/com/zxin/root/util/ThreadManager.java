@@ -3,12 +3,10 @@ package com.zxin.root.util;
 import android.os.Handler;
 import android.os.Looper;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -18,44 +16,54 @@ public class ThreadManager {
 
     private static final int CORE_THREAD_POOL_SIZE = 3;
     private static ScheduledExecutorService mExecutorService;
-    private static Map<Integer, Future> mTaskMap = new HashMap<>();
+
+
+    static {
+        init();
+    }
 
     /**
      * Init thread pool.
      */
-    public static void init() {
+    public synchronized final static void init() {
         if (null == mExecutorService) {
-            mExecutorService = Executors.newScheduledThreadPool(CORE_THREAD_POOL_SIZE);
+            L.d(TAG, "Init Thread Pool Core Pool Size: " + CORE_THREAD_POOL_SIZE);
+            mExecutorService = new ThreadPool(CORE_THREAD_POOL_SIZE);
         }
-        clear();
+    }
+
+    public static class ThreadPool extends ScheduledThreadPoolExecutor {
+
+        public ThreadPool(int corePoolSize) {
+            super(corePoolSize);
+        }
+
+        @Override
+        public void shutdown() {
+            //super.shutdown();
+            L.e(TAG, "Not allow to shutdown");
+        }
+    }
+
+    public static final ExecutorService getThreadPool() {
+        return mExecutorService;
     }
 
     /**
      * Clear thread pool
      */
-    public static void clear() {
-        Collection<Future> futures = mTaskMap.values();
-        if (futures.size() > 0) {
-            for (Future future : futures) {
-                stop(future.hashCode());
-            }
-        }
+    public static final void clear() {
+
     }
 
     /**
-     * Performs a task in a thread.
+     * Performs a task in sub thread.
      *
      * @param runnable task runnable
      * @return Task name, use it to stop task.
      */
-    public static Integer post(Runnable runnable) {
-        if (null == mExecutorService) {
-            init();
-        }
-        Future future = mExecutorService.submit(runnable);
-        Integer taskName = future.hashCode();
-        mTaskMap.put(future.hashCode(), future);
-        return taskName;
+    public static final Future post(Runnable runnable) {
+        return mExecutorService.submit(runnable);
     }
 
     /**
@@ -65,29 +73,8 @@ public class ThreadManager {
      * @delay delay to run the task
      * @return Task name, use it to stop task.
      */
-    public static Integer postDelayed(Runnable runnable, long delay) {
-        if (null == mExecutorService) {
-            init();
-        }
-        Future future = mExecutorService.schedule(runnable, delay, TimeUnit.MILLISECONDS);
-        Integer taskName = future.hashCode();
-        mTaskMap.put(future.hashCode(), future);
-        return taskName;
-    }
-
-    /**
-     * Finish the specified task.
-     *
-     * @param taskName
-     */
-    public static void stop(Integer taskName) {
-        Future future = mTaskMap.get(taskName);
-        if (null != future) {
-            mTaskMap.remove(taskName);
-            if (!future.isDone() && !future.isCancelled() && (null != mExecutorService)) {
-                future.cancel(true);
-            }
-        }
+    public static final Future postDelayed(Runnable runnable, long delay) {
+        return mExecutorService.schedule(runnable, delay, TimeUnit.MILLISECONDS);
     }
 
 
@@ -100,13 +87,13 @@ public class ThreadManager {
      *
      * @param action the action to run on the UI thread
      */
-    public static final void runOnUiThread(Runnable action) {
-
+    public static final boolean runOnUiThread(Runnable action) {
         if (!isUIThread()) {
-            getMainHandler().post(action);
+            return getMainHandler().post(action);
         } else {
             action.run();
         }
+        return true;
     }
 
     /**
@@ -118,25 +105,16 @@ public class ThreadManager {
      * @param delay delayMillis The delay (in milliseconds) until the Runnable
      *        will be executed.
      */
-    public static final void runOnUiThread(Runnable action, long delay) {
-        getMainHandler().postDelayed(action, delay);
+    public static final boolean runOnUiThread(Runnable action, long delay) {
+        return getMainHandler().postDelayed(action, delay);
     }
 
-    public static final void runOnSubThread(Runnable action) {
-        if (!isUIThread()) {
-            action.run();
-        } else {
-            post(action);
-        }
-
+    public static void runOnSubThread(Runnable action) {
+        runOnSubThread(action, 0);
     }
 
     public static final void runOnSubThread(Runnable action, long delay) {
-        if (!isUIThread()) {
-            action.run();
-        } else {
-            postDelayed(action, delay);
-        }
+        postDelayed(action, delay);
     }
 
     public static final boolean isUIThread() {
@@ -155,8 +133,15 @@ public class ThreadManager {
         return sMainHandler;
     }
 
-    public static Future getThread(int futureCode){
-        Future future = mTaskMap.get(futureCode);
-        return future;
+    public final static Thread newThread(Runnable runnable, String name) {
+        return new Thread(runnable, "BN_Thread_" + name);
+    }
+
+    public final static Future startPeriodTask(Runnable runnable, long period) {
+        return startPeriodTask(runnable, 0, period);
+    }
+
+    public final static Future startPeriodTask(Runnable runnable, long delay, long period) {
+        return mExecutorService.scheduleWithFixedDelay(runnable, delay, period, TimeUnit.MILLISECONDS);
     }
 }
