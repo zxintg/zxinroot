@@ -26,6 +26,7 @@ import com.zxin.root.util.UiUtils;
  * liukui
  */
 public class X5WebView extends WebView implements View.OnKeyListener {
+	private static final LogUtils.Tag TAG = new LogUtils.Tag("X5WebView");
 	private ProgressBar mProgressbar;
 	private WebSettings webSetting;
 	public X5WebView(Context arg0) {
@@ -100,7 +101,7 @@ public class X5WebView extends WebView implements View.OnKeyListener {
 				if (mProgressbar.getVisibility() == View.GONE) {
 					mProgressbar.setVisibility(View.VISIBLE);
 				}
-				LogUtils.d("newProgress = " + newProgress);
+				LogUtils.d(TAG,"newProgress = " + newProgress);
 				mProgressbar.setProgress(newProgress);
 			}
 			super.onProgressChanged(view, newProgress);

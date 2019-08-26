@@ -12,38 +12,10 @@ import com.zxin.root.util.SystemPropertiesProxy;
  */
 
 public class LogUtils {
-    /**
-     * 打印一个debug等级的 log
-     */
-    public static void d(String msg) {
-        if (true) {
-            Log.d("jiemo_" + TAG, msg);
-        }
-    }
-
-    /**
-     * 打印一个debug等级的 log
-     */
-    public static void e(String msg) {
-        if (true) {
-            Log.e("disanxuetang" + TAG, msg);
-        }
-    }
-
-    /**
-     * 打印一个debug等级的 log
-     */
-    public static void e(Class cls, String msg) {
-        if (true) {
-            Log.e("jiemo_" + cls.getSimpleName(), msg);
-        }
-    }
-
-
     private static final Tag TAG = new Tag("L");
     private static final String TAG_PREFIX = "BN_";
 
-    private static final String KEY_DEBUG_LEVEL = "persist.nav.log.level";
+    public static final String KEY_DEBUG_LEVEL = "persist.zxin.log.level";
     public static final class Tag {
         private String mTag;
         private static final int MAX_TAG_LENGTH = 23;

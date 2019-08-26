@@ -42,6 +42,7 @@ import java.util.concurrent.ExecutionException;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class ImageUtil {
+    private static final LogUtils.Tag TAG = new LogUtils.Tag("ImageUtil");
     public static final int IMG_120 = 180;
     public static final int IMG_720 = 720;
     public static final int IMG_360 = 360;
@@ -380,7 +381,7 @@ public class ImageUtil {
         Bitmap bitmap = BitmapFactory.decodeFile(FileUtil.getInstance(mContext).getTakePhotoFile().getPath(), op);
         int digree = getDigreeFromFilePath(filePath);
         if (digree != 0) {
-            LogUtils.d("读取图片中相机方向信息 旋转图片：" + digree);
+            LogUtils.d(TAG,"读取图片中相机方向信息 旋转图片：" + digree);
             // 旋转图片
             Matrix m = new Matrix();
             m.postRotate(digree);
