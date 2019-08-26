@@ -1,4 +1,4 @@
-package com.zxin.root.util;
+package com.zxin.root.util.storage;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;

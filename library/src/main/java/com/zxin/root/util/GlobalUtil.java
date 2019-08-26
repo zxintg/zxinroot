@@ -206,4 +206,7 @@ public class GlobalUtil {
         return 0;
     }
 
+    public static Context getContext() {
+        return mContext.getApplicationContext();
+    }
 }
