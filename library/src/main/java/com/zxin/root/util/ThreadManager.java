@@ -3,6 +3,8 @@ package com.zxin.root.util;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.zxin.root.util.logger.LogUtils;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
@@ -13,6 +15,8 @@ import java.util.concurrent.TimeUnit;
  * The file is the thread pool manager
  */
 public class ThreadManager {
+
+    public static final LogUtils.Tag TAG = new LogUtils.Tag("ThreadManager");
 
     private static final int CORE_THREAD_POOL_SIZE = 3;
     private static ScheduledExecutorService mExecutorService;
@@ -27,7 +31,7 @@ public class ThreadManager {
      */
     public synchronized final static void init() {
         if (null == mExecutorService) {
-            L.d(TAG, "Init Thread Pool Core Pool Size: " + CORE_THREAD_POOL_SIZE);
+            LogUtils.d(TAG, "Init Thread Pool Core Pool Size: " + CORE_THREAD_POOL_SIZE);
             mExecutorService = new ThreadPool(CORE_THREAD_POOL_SIZE);
         }
     }
@@ -41,7 +45,7 @@ public class ThreadManager {
         @Override
         public void shutdown() {
             //super.shutdown();
-            L.e(TAG, "Not allow to shutdown");
+            LogUtils.e(TAG, "Not allow to shutdown");
         }
     }
 
