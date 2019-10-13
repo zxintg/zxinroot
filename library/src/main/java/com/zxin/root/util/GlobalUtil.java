@@ -11,22 +11,27 @@ import com.zxin.root.util.logger.LogUtils;
 import java.io.File;
 
 public class GlobalUtil {
+
+    public static final long ONE_DAY = (24 * 60 * 60 * 1000);
     private static String mLogPath;
     private static String mCachePath;
     public static String mAppSDDir;
     //是否记录日志
-    private static boolean isRecordLog = true;
+    private static boolean isRecordLog;
     //删除日志时间
-    private static int mDeleteLogDay = 3;
-    public static final long ONE_DAY = (24 * 60 * 60 * 1000);
+    private static int mDeleteLogDay;
     private static Context mContext;
 
     /****
      * application初始化的时候设置
      * @param context
      */
-    public static void setContext(Context context) {
-        GlobalUtil.mContext = context;
+    protected void setContext(Context context) {
+        mContext = context;
+    }
+
+    public static Context getContext() {
+        return mContext;
     }
 
     public static String getAppLogDirPath() {
@@ -37,11 +42,15 @@ public class GlobalUtil {
         return getSdPath() + File.separator + mCachePath;
     }
 
+    protected void setAppCache(String cachePath){
+        mCachePath = cachePath;
+    }
+
     public static String getSdPath() {
         return mAppSDDir;
     }
 
-    public static void SetSdPath(String appSDDir) {
+    protected void setSdPath(String appSDDir) {
         mAppSDDir = appSDDir;
     }
 
@@ -65,23 +74,19 @@ public class GlobalUtil {
         return 0;
     }
 
-    public static Context getContext() {
-        return mContext.getApplicationContext();
-    }
-
-    public static void setRecordLog(boolean recordLog) {
-        isRecordLog = recordLog;
-    }
-
     public static boolean getIsRecordLog() {
         return isRecordLog;
+    }
+
+    protected void setRecordLog(boolean recordLog) {
+        isRecordLog = recordLog;
     }
 
     public static int getDayToDeleteLog() {
         return mDeleteLogDay;
     }
 
-    public static void setDayToDeleteLog(int deleteLogDay) {
+    protected void setDayToDeleteLog(int deleteLogDay) {
         mDeleteLogDay = deleteLogDay;
     }
 }
