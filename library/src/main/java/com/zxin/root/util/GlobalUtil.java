@@ -38,6 +38,10 @@ public class GlobalUtil {
         return getSdPath() + File.separator + mLogPath;
     }
 
+    protected void setLogPath(String logPath){
+        mLogPath = logPath;
+    }
+
     public static String getAppCache() {
         return getSdPath() + File.separator + mCachePath;
     }
