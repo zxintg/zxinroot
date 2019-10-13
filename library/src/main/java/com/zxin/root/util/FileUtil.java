@@ -164,7 +164,7 @@ public final class FileUtil {
         }
         FileOutputStream fos = null;
         BufferedOutputStream bos = null;
-        File fileName = createFileByTime(dir, "3rde", "jpg");
+        File fileName = createFileByTime(dir, "zxin", "jpg");
         try {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
@@ -900,7 +900,7 @@ public final class FileUtil {
      * @return
      */
     public String cutoutActivity(Bitmap bitmap) {
-        return saveBitmap(bitmap, "3rdedu", 100).getAbsolutePath();
+        return saveBitmap(bitmap, "zxin", 100).getAbsolutePath();
     }
 
     public List<MenuEntity> getAllMenuList() {
