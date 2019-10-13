@@ -29,7 +29,7 @@ public class SelectorUtil {
         if (util == null)
             synchronized (SelectorUtil.class) {
                 if (util == null)
-                    util = new SelectorUtil(mContext);
+                    util = new SelectorUtil(mContext.getApplicationContext());
             }
         return util;
     }

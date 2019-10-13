@@ -27,7 +27,7 @@ public class SharedPreferencesManager extends SharePrefUtils {
         if (manager == null)
             synchronized (SharedPreferencesManager.class) {
                 if (manager == null) {
-                    manager = new SharedPreferencesManager(mContext);
+                    manager = new SharedPreferencesManager(mContext.getApplicationContext());
                 }
             }
         return manager;

@@ -53,7 +53,7 @@ public class SystemInfoUtil {
         if (infoUtil==null){
             synchronized (SystemInfoUtil.class){
                 if (infoUtil==null){
-                    infoUtil = new SystemInfoUtil(mContext);
+                    infoUtil = new SystemInfoUtil(mContext.getApplicationContext());
                 }
             }
         }

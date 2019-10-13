@@ -61,7 +61,7 @@ public class SystemPropertiesProxy {
         if (proxy == null) {
             synchronized (SystemPropertiesProxy.class) {
                 if (proxy == null) {
-                    proxy = new SystemPropertiesProxy(mContext);
+                    proxy = new SystemPropertiesProxy(mContext.getApplicationContext());
                 }
             }
         }

@@ -59,7 +59,7 @@ public class ImageUtil {
         if (util == null)
             synchronized (ImageUtil.class) {
                 if (util == null)
-                    util = new ImageUtil(mContext);
+                    util = new ImageUtil(mContext.getApplicationContext());
             }
         return util;
     }

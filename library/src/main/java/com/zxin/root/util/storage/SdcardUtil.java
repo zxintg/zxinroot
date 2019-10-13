@@ -69,7 +69,7 @@ public class SdcardUtil {
         if (mInstance == null) {
             synchronized (SdcardUtil.class) {
                 if (mInstance == null) {
-                    mInstance = new SdcardUtil(mContext);
+                    mInstance = new SdcardUtil(mContext.getApplicationContext());
                 }
             }
         }

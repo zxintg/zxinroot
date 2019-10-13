@@ -60,7 +60,7 @@ public final class FileUtil {
         if (util == null)
             synchronized (FileUtil.class) {
                 if (util == null)
-                    util = new FileUtil(mContext);
+                    util = new FileUtil(mContext.getApplicationContext());
             }
         return util;
     }
@@ -920,4 +920,39 @@ public final class FileUtil {
         }.getType());
     }
 
+    /****
+     * 删除系统日志
+     */
+    public void cleanLogFile() {
+        String path = GlobalUtil.getAppLogDirPath();
+        cleanLogFile(path);
+    }
+
+    public static void cleanLogFile(final String path) {
+        ThreadManager.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        File directory = new File(path);
+                        if (directory.exists()) {
+
+                            LogUtils.d(TAG, "clean dir:" + path);
+
+                            File[] files = directory.listFiles();
+
+                            for (File file : files) {
+                                if (file.isDirectory()) {
+                                    cleanLogFile(file.getAbsolutePath());
+                                } else if (file.isFile()) {
+                                    if (System.currentTimeMillis() - file.lastModified()
+                                            >= (GlobalUtil.getDayToDeleteLog() * GlobalUtil.ONE_DAY)) {
+                                        LogUtils.d(TAG, "remove file:" + file.getName());
+                                        file.delete();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+    }
 }

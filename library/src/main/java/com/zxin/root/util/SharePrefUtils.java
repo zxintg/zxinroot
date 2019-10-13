@@ -29,7 +29,7 @@ public class SharePrefUtils {
         if (prefUtils==null){
             synchronized (SharePrefUtils.class){
                 if (prefUtils==null){
-                    prefUtils = new SharePrefUtils(mContext);
+                    prefUtils = new SharePrefUtils(mContext.getApplicationContext());
                 }
             }
         }

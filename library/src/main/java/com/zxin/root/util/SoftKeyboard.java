@@ -19,7 +19,7 @@ public class SoftKeyboard {
         if (keyboard == null) {
             synchronized (SoftKeyboard.class) {
                 if (keyboard == null) {
-                    keyboard = new SoftKeyboard(mContext);
+                    keyboard = new SoftKeyboard(mContext.getApplicationContext());
                 }
             }
         }

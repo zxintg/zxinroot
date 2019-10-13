@@ -25,7 +25,7 @@ public class ToastUtil {
     }
 
     public static ToastUtil getInstance(Context mContext) {
-        return getInstance(mContext,true);
+        return getInstance(mContext.getApplicationContext(),true);
     }
 
     public static ToastUtil getInstance(Context mContext, boolean canShow) {
@@ -35,7 +35,7 @@ public class ToastUtil {
         if (toastUtil == null) {
             synchronized (ToastUtil.class) {
                 if (toastUtil == null) {
-                    toastUtil = new ToastUtil(mContext);
+                    toastUtil = new ToastUtil(mContext.getApplicationContext());
                 }
             }
         }

@@ -36,7 +36,7 @@ public class UiUtils {
         if (uiUtils==null){
             synchronized (UiUtils.class){
                 if (uiUtils==null){
-                    uiUtils = new UiUtils(mContext);
+                    uiUtils = new UiUtils(mContext.getApplicationContext());
                 }
             }
         }

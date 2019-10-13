@@ -23,7 +23,7 @@ public abstract class SystemPersimManage {
     private Context context;
 
     public SystemPersimManage (Context mContext) {
-        context = mContext;
+        context = mContext.getApplicationContext();
     }
 
     /****
